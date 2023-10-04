@@ -50,7 +50,7 @@ const SignModal = ({ open, onClose, children }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
+          // justifyContent: "center",
           borderRadius: 2,
         }}
       >

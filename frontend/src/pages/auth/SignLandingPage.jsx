@@ -4,7 +4,7 @@ import { Google, TwitterLogo } from "../../svg/svg";
 import AppleIcon from "@mui/icons-material/Apple";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
-import { useStyles } from "./SignLandingPage.style";
+import { useStyles } from "./SignLandingPage.styles";
 import { SignModal } from "../../components";
 import { createPortal } from "react-dom";
 import { Outlet } from "react-router-dom";
