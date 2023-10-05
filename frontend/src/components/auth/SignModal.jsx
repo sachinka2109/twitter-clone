@@ -1,14 +1,15 @@
-import { Box, Container, IconButton } from "@mui/material";
+import { Box, Container, IconButton, Typography } from "@mui/material";
 import React from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { TwitterLogo } from "../../svg/svg";
+import CreateAccount from "./CreateAccount";
 import { useLocation } from "react-router-dom";
 
 const LogoHeader = ({ onClose, location }) => (
   <Box
     sx={{
       display: "flex",
-      justifyContent: "center",
+      justifyContent: location.pathname.includes('/create-account') ? "flex-start" : "center",
       alignItems: "center",
       width: "100%",
       position: "relative",
@@ -22,9 +23,15 @@ const LogoHeader = ({ onClose, location }) => (
     >
       <CloseIcon style={{ color: "white" }} />
     </IconButton>
-    <Box>
-      <TwitterLogo width={30} />
-    </Box>
+    {location.pathname.includes('/create-account') ? (
+      <Typography variant="h6" sx={{ color: "white",px:8 }}>
+        Step 1 of 5
+      </Typography>
+    ) : (
+      <Box>
+        <TwitterLogo width={30} />
+      </Box>
+    )}
   </Box>
 );
 
@@ -46,7 +53,7 @@ const SignModal = ({ open, onClose, children }) => {
         overflow: "hidden",
       }}
     >
-      <LogoHeader location={location} onClose={onClose} />
+      <LogoHeader onClose={onClose} location={location}/>
       <Box
         sx={{
           display: "flex",

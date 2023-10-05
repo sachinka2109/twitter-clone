@@ -18,6 +18,7 @@ import { Link } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Google } from "../../svg/svg";
 import AppleIcon from "@mui/icons-material/Apple";
+import { useStyles } from "./styles/Signin.styles";
 
 const Signin = () => {
   const CurvedButton = styled(Button)({
@@ -29,6 +30,9 @@ const Signin = () => {
     "& .MuiOutlinedInput-root": {
       "& fieldset": {
         borderColor: "#333639", // Change the border color to yellow
+      },
+      "&:hover fieldset": {
+        borderColor: "#333639",
       },
     },
     "& label.MuiInputLabel-root": {
@@ -54,7 +58,7 @@ const Signin = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
+  const classes = useStyles();
   return !tab ? (
     <Stack
       sx={{
@@ -155,45 +159,41 @@ const Signin = () => {
         Enter your password
       </Typography>
       <Stack direction={"column"} spacing={15} width={400}>
-        <Stack
-          direction={"column"}
-          spacing={2}
-          sx={{ justifyContent: "space-between" }}
-        >
-          <FormGroup>
-            <CustomTextField
-              variant="outlined"
-              label="Phone,email,or username"
+        <Stack direction={"column"} spacing={2}>
+          <CustomTextField
+            variant="outlined"
+            label="Phone,email,or username"
+            inputProps={{ style: { color: "white" } }}
+            id="email"
+            value={data.email}
+            onchange={handleDataChange}
+            fullWidth
+          />
+          <FormControl variant="outlined">
+            <InputLabel htmlFor="password" sx={{ color: "rgb(113, 118, 123)" }}>
+              Password
+            </InputLabel>
+            <OutlinedInput
+              className={classes.customInput}
+              id="password"
               inputProps={{ style: { color: "white" } }}
-              id="email"
-              value={data.email}
-              onchange={handleDataChange}
-              fullWidth
+              type={showPassword ? "text" : "password"}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end"
+                    sx={{ color: "rgb(113, 118, 123)" }}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
             />
-            <FormControl variant="outlined">
-              <InputLabel htmlFor="password" sx={{color:'rgb(113, 118, 123)'}}>Password</InputLabel>
-              <OutlinedInput
-                id="password"
-                inputProps={{ style: { color: "white"} }}
-                type={showPassword ? "text" : "password"}
-                endAdornment={
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                      sx={{color:"rgb(113, 118, 123)"}}
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label="Password"
-              />
-            </FormControl>
-          </FormGroup>
-
+          </FormControl>
           <Linky
             component={Link}
             to="/forgotpassword"
@@ -202,27 +202,27 @@ const Signin = () => {
             Forgot password?
           </Linky>
         </Stack>
-        <Stack spacing={3}>
-          <CurvedButton
-            variant="contained"
-            sx={{
-              backgroundColor: "#eff3f4",
-              color: "black",
-              fontWeight: "bold",
-              "&:hover": { backgroundColor: "" },
-              height: "50px !important",
-            }}
-            onClick={() => setTab(true)}
-          >
-            Log in
-          </CurvedButton>
-          <Typography
-            variant="body1"
-            sx={{ color: "rgb(113, 118, 123)", marginTop: "40px !important" }}
-          >
-            Don't have an account? <Link to="/signup">Sign up</Link>
-          </Typography>
-        </Stack>
+        {/* <Stack spacing={1}> */}
+        <CurvedButton
+          variant="contained"
+          sx={{
+            backgroundColor: "#eff3f4",
+            color: "black",
+            fontWeight: "bold",
+            "&:hover": { backgroundColor: "" },
+            height: "50px !important",
+          }}
+          onClick={() => setTab(true)}
+        >
+          Log in
+        </CurvedButton>
+        <Typography
+          variant="body1"
+          sx={{ color: "rgb(113, 118, 123)", marginTop: "20px !important" }}
+        >
+          Don't have an account? <Link to="/signup">Sign up</Link>
+        </Typography>
+        {/* </Stack> */}
       </Stack>
     </Stack>
   );

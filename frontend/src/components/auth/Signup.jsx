@@ -1,13 +1,14 @@
 import { Stack, Typography, Button, Divider } from "@mui/material";
-import React,{useState} from "react";
-import { Link } from "react-router-dom";
+import React,{useEffect, useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "@emotion/styled";
 import { Google } from "../../svg/svg";
 import AppleIcon from "@mui/icons-material/Apple";
 import CreateAccount from "./CreateAccount";
 
 const Signup = () => {
-  const [createAccountToggle,setCreateAccountToggle] = useState(false);
+  const navigate = useNavigate();
+  // const [createAccountToggle,setCreateAccountToggle] = useState(false);
   const CurvedButton = styled(Button)({
     borderRadius: 25,
     textTransform: "none",
@@ -15,11 +16,16 @@ const Signup = () => {
   });
 
   const onCreateAccountToggle = () => {
-    setCreateAccountToggle(!createAccountToggle)
+    // setCreateAccountToggle(!createAccountToggle)
+    navigate('/create-account');
   }
 
+  useEffect(() => {
+
+  },[])
+
   return (
-    !createAccountToggle ? (
+    // !createAccountToggle ? (
       <Stack
         sx={{
           margin: "auto",
@@ -120,7 +126,7 @@ const Signup = () => {
           </Stack>
         </Stack>
       </Stack>
-    ): <CreateAccount/>
+    // ): <CreateAccount/>
   );
 };
 
